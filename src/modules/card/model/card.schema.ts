@@ -1,4 +1,4 @@
-import {Column, ForeignKey, HasMany, Model, Table} from 'sequelize-typescript';
+import {Column, Default, ForeignKey, HasMany, Model, Table} from 'sequelize-typescript';
 import {Grade} from "../../grade/model/grade.schema";
 import {CardsPack} from "../../cards-pack/model/cards-pack.schema";
 

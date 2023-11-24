@@ -7,6 +7,4 @@ export class CreateCardsPackDTO {
     userId: number;
     @IsBoolean()
     isPrivate: boolean;
-    @IsNumber()
-    cardsCount: number;
 }

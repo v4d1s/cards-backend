@@ -1,4 +1,4 @@
-import {Column, ForeignKey, Model, Table} from 'sequelize-typescript';
+import {Column, Default, ForeignKey, Model, Table} from 'sequelize-typescript';
 import {Card} from "../../card/model/card.schema";
 
 @Table
@@ -13,7 +13,9 @@ export class Grade extends Model {
     @Column
     userId: number;
     @Column
+    @Default(0)
     grade: number;
     @Column
+    @Default(0)
     shots: number;
 }

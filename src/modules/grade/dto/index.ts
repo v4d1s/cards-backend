@@ -5,8 +5,4 @@ export class CreateGradeDTO {
     cardId: number;
     @IsNumber()
     userId: number;
-    @IsNumber()
-    grade: number;
-    @IsNumber()
-    shots: number;
 }
