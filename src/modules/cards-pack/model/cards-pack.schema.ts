@@ -13,11 +13,11 @@ export class CardsPack extends Model {
     name: string;
     @ForeignKey(() => User)
     userId: number;
-    @Column
     @Default(false)
-    isPrivate: boolean;
     @Column
+    isPrivate: boolean;
     @Default(0)
+    @Column
     cardsCount: number;
     @HasMany(() => Card, {
         onDelete: 'CASCADE',

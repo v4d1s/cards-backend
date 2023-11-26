@@ -12,10 +12,10 @@ export class Grade extends Model {
     cardId: number;
     @Column
     userId: number;
-    @Column
     @Default(0)
+    @Column
     grade: number;
-    @Column
     @Default(0)
+    @Column
     shots: number;
 }
