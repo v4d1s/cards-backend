@@ -16,6 +16,7 @@ export class CardService {
 
     addCard(dto: CreateCardDTO) {
         // TODO add_card service
+        // TODO add grade of this card to all user
     }
 
     updateCard(dto: CreateCardDTO, cardId: number) {

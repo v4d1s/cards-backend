@@ -19,6 +19,7 @@ export class UserService {
             throw new Error('Some user have this email')
         }
         const passwordHashed = await argon2.hash(dto.password);
+        // TODO add all grades for new user
         const userRecord = await this.userRepository.create({
             password: passwordHashed,
             email: dto.email,
