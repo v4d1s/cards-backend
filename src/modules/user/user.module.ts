@@ -6,6 +6,10 @@ import { User } from './model/user.schema';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy, jwtConstants } from './jwt.strategy';
+import {Grade} from "../grade/model/grade.schema";
+import {GradeService} from "../grade/grade.service";
+import {CardService} from "../card/card.service";
+import {Card} from "../card/model/card.schema";
 
 @Module({
   imports: [
@@ -14,9 +18,9 @@ import { JwtStrategy, jwtConstants } from './jwt.strategy';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '1h' },
     }),
-    SequelizeModule.forFeature([User]),
+    SequelizeModule.forFeature([User, Grade, Card]),
   ],
-  providers: [UserService, JwtStrategy],
+  providers: [UserService, JwtStrategy, GradeService, CardService],
   controllers: [UserController],
   exports: [PassportModule, UserService]
 })

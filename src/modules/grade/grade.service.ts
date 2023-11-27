@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import {InjectModel} from "@nestjs/sequelize";
 import {Grade} from "./model/grade.schema";
+import {CreateGradeDTO} from "./dto";
 
 @Injectable()
 export class GradeService {
@@ -8,11 +9,27 @@ export class GradeService {
         @InjectModel(Grade) private readonly gradeRepository: typeof Grade,
     ) {}
 
-    updateGrade(cardId: number) {
+    updateGrade(dto: CreateGradeDTO) {
         // TODO update_grade service
     }
 
-    createGrade(cardId: number) {
-        // TODO create_grade service
+    async createGradesForNewUser(list: any, userId: number) {
+        for (let card of list) {
+            const newGrade = {
+                cardId: card.id,
+                userId: userId,
+            };
+            await this.gradeRepository.create(newGrade);
+        }
+    }
+
+    async createGradesForNewCard(list: any, cardId: number) {
+        for (let card of list) {
+            const newGrade = {
+                cardId: cardId,
+                userId: card.id,
+            };
+            await this.gradeRepository.create(newGrade);
+        }
     }
 }

@@ -19,17 +19,12 @@ export class UserService {
             throw new Error('Some user have this email')
         }
         const passwordHashed = await argon2.hash(dto.password);
-        // TODO add all grades for new user
         const userRecord = await this.userRepository.create({
             password: passwordHashed,
             email: dto.email,
             name: dto.email,
         });
-        return {
-            user: {
-                email: userRecord.email,
-            }
-        }
+        return userRecord.id;
     }
 
     async login(dto: CreateUserDTO) {
@@ -55,5 +50,9 @@ export class UserService {
 
     async updateName(name: string, email: string) {
         return await this.userRepository.update({name: name}, {where: { email: email }})
+    }
+
+    async getAllUsersId() {
+        return await this.userRepository.findAll({attributes: ['id']});
     }
 }

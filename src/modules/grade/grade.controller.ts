@@ -1,12 +1,13 @@
-import {Controller, Get, Param, Patch, Post} from '@nestjs/common';
+import {Body, Controller, Patch} from '@nestjs/common';
 import {GradeService} from "./grade.service";
+import {CreateGradeDTO} from "./dto";
 
 @Controller('/pack/:packId/:cardId')
 export class GradeController {
     constructor(private readonly gradeService: GradeService) {}
 
     @Patch()
-    updateGrade(@Param('cardId') cardId: number) {
-        return this.gradeService.updateGrade(cardId);
+    updateGrade(@Body() dto: CreateGradeDTO) {
+        return this.gradeService.updateGrade(dto);
     }
 }
