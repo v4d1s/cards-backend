@@ -1,6 +1,7 @@
-import {Body, Controller, Patch, Post} from '@nestjs/common';
+import {Body, Controller, Patch, Post, UseGuards, Request, Get} from '@nestjs/common';
 import {UserService} from "./user.service";
 import {CreateUserDTO} from "./dto";
+import { AuthGuard } from './auth.guard';
 
 @Controller('auth')
 export class UserController {
@@ -15,10 +16,16 @@ export class UserController {
         return this.userService.register(dto);
     }
 
-    // TODO valid path?
+    @UseGuards(AuthGuard)
     @Patch('me')
     updateName() {
         return this.userService.updateName();
+    }
+
+    @UseGuards(AuthGuard)
+    @Get('profile')
+    getProfile(@Request() req) {
+      return req.user;
     }
 
     // auth.post("/me", findUserByToken(getMe, "getMe"));
