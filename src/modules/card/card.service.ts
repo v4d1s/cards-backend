@@ -1,29 +1,44 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable, UseGuards} from '@nestjs/common';
 import {InjectModel} from "@nestjs/sequelize";
 import {Card} from "./model/card.schema";
 import {CreateCardDTO} from "./dto";
+import {AuthGuard} from "../user/auth.guard";
 
+@UseGuards(AuthGuard)
 @Injectable()
 export class CardService {
     constructor(
         @InjectModel(Card) private readonly cardRepository: typeof Card,
     ) {}
 
-    getCards(packId: number) {
-        // TODO get_cards service
-        // Для каждой карточки также добавляем поля ГРАДЕ (левое присоединением)
+    async getCards(packId: number) {
+        return await this.cardRepository.findAll({ where: { packId: packId } })
+        // TODO Для каждой карточки также добавляем поля ГРАДЕ (левое присоединением)
     }
 
-    addCard(dto: CreateCardDTO) {
-        // TODO add_card service
-        // TODO add grade of this card to all user
+    async getCard(cardId: number) {
+        return await this.cardRepository.findOne({ where: { id: cardId } })
+        // TODO Для каждой карточки также добавляем поля ГРАДЕ (левое присоединением)
     }
 
-    updateCard(dto: CreateCardDTO, cardId: number) {
-        // TODO update_card service
+    async addCard(dto: CreateCardDTO) {
+        console.log(dto);
+        const newCard = {
+            packId: dto.packId,
+            question: dto.question,
+            answer: dto.answer,
+        };
+        return await this.cardRepository.create(newCard);
     }
 
-    deleteCard(cardId: number) {
-        // TODO delete_card service
+    async updateCard(dto: CreateCardDTO, cardId: number) {
+        return await this.cardRepository.update(
+            {answer: dto.answer, question: dto.question},
+            {where: { id: cardId }}
+        )
+    }
+
+    async deleteCard(cardId: number) {
+        return await this.cardRepository.destroy({where: {id: cardId}})
     }
 }

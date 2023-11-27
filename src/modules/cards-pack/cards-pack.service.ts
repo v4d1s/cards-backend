@@ -29,4 +29,15 @@ export class CardsPackService {
     async deleteCardPack(packId: number) {
         return await this.cardsPackRepository.destroy({where: {id: packId}})
     }
+
+    async updateCardCount(isPlus: boolean, packId: number) {
+        const card = await this.cardsPackRepository.findOne({where: {id: packId}});
+        if (!card) throw new Error('Pack not found');
+        let newCount = card.cardsCount;
+        if (isPlus)
+            newCount++;
+        else
+            newCount--;
+        return await this.cardsPackRepository.update({cardsCount: newCount}, {where: {id: packId}});
+    }
 }
