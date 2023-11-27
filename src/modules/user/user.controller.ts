@@ -17,16 +17,14 @@ export class UserController {
     }
 
     @UseGuards(AuthGuard)
-    @Patch('me')
-    updateName() {
-        return this.userService.updateName();
+    @Patch('profile')
+    updateName(@Request() req: any, @Body('newName') name: string) {
+        return this.userService.updateName(name, req.user.email);
     }
 
     @UseGuards(AuthGuard)
     @Get('profile')
-    getProfile(@Request() req) {
-      return req.user;
+    getProfile(@Request() req: any) {
+        return this.userService.findOneByEmail(req.user.email);
     }
-
-    // auth.post("/me", findUserByToken(getMe, "getMe"));
 }

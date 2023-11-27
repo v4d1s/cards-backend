@@ -16,11 +16,15 @@ export class UserService {
     ) { }
 
     async register(dto: CreateUserDTO) {
+        const existUser = await this.findOneByEmail(dto.email)
+        if (existUser) {
+            throw new Error('Some user have this email')
+        }
         const passwordHashed = await argon2.hash(dto.password);
-
         const userRecord = await this.userRepository.create({
             password: passwordHashed,
             email: dto.email,
+            name: dto.email,
         });
         return {
             user: {
@@ -46,11 +50,11 @@ export class UserService {
         }
     }
 
-    async findOneByEmail(email) {
+    async findOneByEmail(email: string) {
         return await this.userRepository.findOne({ where: { email: email } });
     }
 
-    updateName() {
-
+    async updateName(name: string, email: string) {
+        return await this.userRepository.update({name: name}, {where: { email: email }})
     }
 }
