@@ -1,6 +1,4 @@
-import * as jwt from 'jsonwebtoken'
 import * as argon2 from 'argon2';
-
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from "@nestjs/sequelize";
 import { User } from "./model/user.schema";
@@ -39,7 +37,7 @@ export class UserService {
             throw new Error('User not found')
         } else {
             if (await argon2.verify(userRecord.password, dto.password)) {
-                const payload = { email: dto.email };
+                const payload = { email: dto.email, id: userRecord.id };
                 return {
                     access_token: this.jwtService.sign(payload),
                 }

@@ -8,19 +8,25 @@ export class CardsPackService {
     constructor(
         @InjectModel(CardsPack) private readonly cardsPackRepository: typeof CardsPack,
     ) {}
-    getCardsPacks() {
-        // TODO get_cardsPack service
+    async getCardsPacks() {
+        return await this.cardsPackRepository.findAll();
     }
 
-    getCardsPack(packId: number) {
-        // TODO get_cardPack service
+    async getCardsPack(packId: number) {
+        return await this.cardsPackRepository.findOne({ where: { id: packId } });
     }
 
-    addCardsPack(dto: CreateCardsPackDTO) {
-        // TODO add_cardsPack service
+    async addCardsPack(dto: CreateCardsPackDTO) {
+        const newPack = {
+            name: dto.name,
+            userId: dto.userId,
+            isPrivate: dto.isPrivate,
+        };
+        await this.cardsPackRepository.create(newPack);
+        return dto;
     }
 
-    deleteCardPack(packId: number) {
-        // TODO delete_cardPack service
+    async deleteCardPack(packId: number) {
+        return await this.cardsPackRepository.destroy({where: {id: packId}})
     }
 }
