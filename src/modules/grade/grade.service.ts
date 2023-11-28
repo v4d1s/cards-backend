@@ -9,8 +9,10 @@ export class GradeService {
         @InjectModel(Grade) private readonly gradeRepository: typeof Grade,
     ) {}
 
-    updateGrade(dto: CreateGradeDTO) {
-        // TODO update_grade service
+    async updateGrade(dto: CreateGradeDTO, userId: number, cardId: number) {
+        let newGrade = (await this.gradeRepository.findOne({where: {cardId, userId}})).grade + dto.grade;
+        let newShots = (await this.gradeRepository.findOne({where: {cardId, userId}})).shots + 1;
+        return await this.gradeRepository.update({grade: newGrade, shots: newShots}, {where: {cardId, userId}})
     }
 
     async createGradesForNewUser(list: any, userId: number) {

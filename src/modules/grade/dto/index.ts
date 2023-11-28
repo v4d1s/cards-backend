@@ -2,7 +2,7 @@ import {IsNumber} from 'class-validator';
 
 export class CreateGradeDTO {
     @IsNumber()
-    cardId: number;
+    grade: number;
     @IsNumber()
-    userId: number;
+    shots: number;
 }
