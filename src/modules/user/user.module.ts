@@ -6,10 +6,10 @@ import { User } from './model/user.schema';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy, jwtConstants } from './jwt.strategy';
-import {Grade} from "../grade/model/grade.schema";
-import {GradeService} from "../grade/grade.service";
-import {CardService} from "../card/card.service";
-import {Card} from "../card/model/card.schema";
+import { Grade } from '../grade/model/grade.schema';
+import { GradeService } from '../grade/grade.service';
+import { CardService } from '../card/card.service';
+import { Card } from '../card/model/card.schema';
 
 @Module({
   imports: [
@@ -22,6 +22,6 @@ import {Card} from "../card/model/card.schema";
   ],
   providers: [UserService, JwtStrategy, GradeService, CardService],
   controllers: [UserController],
-  exports: [PassportModule, UserService]
+  exports: [PassportModule, UserService],
 })
 export class UserModule {}
