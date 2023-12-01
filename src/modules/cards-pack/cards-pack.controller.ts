@@ -7,6 +7,7 @@ import {
   Post,
   UseGuards,
   Request,
+  Query,
 } from '@nestjs/common';
 import { CardsPackService } from './cards-pack.service';
 import { CreateCardsPackDTO } from './dto';
@@ -20,9 +21,26 @@ export class CardsPackController {
     private readonly cardsPackService: CardsPackService,
     private readonly userService: UserService,
   ) {}
+  // @Get('')
+  // getCardsPacks() {
+  //   return this.cardsPackService.getCardsPacks();
+  // }
   @Get('')
-  getCardsPacks() {
-    return this.cardsPackService.getCardsPacks();
+  getCardsPacks(
+      @Query('user_id') userId: number,
+      @Query('page') page: number,
+      @Query('pageCount') pageCount: number,
+      @Query('sortPacks') sort: string,
+      @Query('min') min: number,
+      @Query('max') max: number,
+      @Query('cardPacksTotalCount') totalCount: number,
+      @Query('packName') packName: string,
+      @Request() req: any,
+  ) {
+    if (userId != null || userId != undefined)
+      return this.cardsPackService.getCardsPacksFromUser(userId, page, pageCount, sort, min, max, totalCount, packName);
+    else
+      return this.cardsPackService.getCardsPacks(req.user.id, page, pageCount, sort, min, max, totalCount, packName);
   }
 
   @Get(':packId')
