@@ -34,7 +34,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -57,7 +57,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -79,7 +79,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -101,7 +101,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -123,7 +123,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -145,7 +145,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -167,7 +167,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -189,7 +189,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -227,7 +227,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -249,7 +249,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -271,7 +271,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -293,7 +293,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -315,7 +315,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -337,7 +337,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -359,7 +359,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
@@ -381,7 +381,7 @@ export class CardsPackService {
                 model: User,
                 required: true,
                 right: true,
-                where: { id: userId },
+                where: { userId },
                 through: {
                   attributes: ['name']
                 },
