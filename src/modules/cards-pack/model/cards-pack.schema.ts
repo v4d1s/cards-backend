@@ -4,7 +4,7 @@ import {
   Model,
   Table,
   ForeignKey,
-  Default,
+  Default, BelongsTo,
 } from 'sequelize-typescript';
 import { Card } from '../../card/model/card.schema';
 import { User } from '../../user/model/user.schema';
@@ -18,8 +18,12 @@ export class CardsPack extends Model {
   id: number;
   @Column
   name: string;
+
   @ForeignKey(() => User)
   userId: number;
+  @BelongsTo(() => User, 'userId')
+  declare user: User;
+
   @Default(false)
   @Column
   isPrivate: boolean;
