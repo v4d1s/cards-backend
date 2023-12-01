@@ -28,7 +28,6 @@ export class UserService {
 
   async login(dto: CreateUserDTO) {
     const userRecord = await this.userRepository.findOne({
-      attributes: { exclude: ['password'] },
       where: { email: dto.email },
     });
     if (!userRecord) {
