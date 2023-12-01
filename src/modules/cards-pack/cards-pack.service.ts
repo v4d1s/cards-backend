@@ -34,7 +34,7 @@ export class CardsPackService {
               cardsCount: { [Op.between]: [min, max] },
               isPrivate: {}
             },
-            order: ['updatedAt', 'DESC'],
+            order: [['updatedAt', 'DESC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -44,7 +44,7 @@ export class CardsPackService {
               [Op.or]: [{ isPrivate: false }, { isPrivate: true, userId: userId }],
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['updatedAt', 'DESC'],
+            order: [['updatedAt', 'DESC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -56,7 +56,7 @@ export class CardsPackService {
               name: { [Op.startsWith]: packName },
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['updatedAt', 'ASC'],
+            order: [['updatedAt', 'ASC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -66,7 +66,7 @@ export class CardsPackService {
               [Op.or]: [{ isPrivate: false }, { isPrivate: true, userId: userId }],
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['updatedAt', 'ASC'],
+            order: [['updatedAt', 'ASC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -78,7 +78,7 @@ export class CardsPackService {
               name: { [Op.startsWith]: packName },
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['cardsCount', 'DESC'],
+            order: [['cardsCount', 'DESC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -88,7 +88,7 @@ export class CardsPackService {
               [Op.or]: [{ isPrivate: false }, { isPrivate: true, userId: userId }],
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['cardsCount', 'DESC'],
+            order: [['cardsCount', 'DESC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -100,7 +100,7 @@ export class CardsPackService {
               name: { [Op.startsWith]: packName },
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['cardsCount', 'ASC'],
+            order: [['cardsCount', 'ASC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -110,7 +110,7 @@ export class CardsPackService {
               [Op.or]: [{ isPrivate: false }, { isPrivate: true, userId: userId }],
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['cardsCount', 'ASC'],
+            order: [['cardsCount', 'ASC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -138,7 +138,7 @@ export class CardsPackService {
               name: { [Op.startsWith]: packName },
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['updatedAt', 'DESC'],
+            order: [['updatedAt', 'DESC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -148,7 +148,7 @@ export class CardsPackService {
               userId: userId,
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['updatedAt', 'DESC'],
+            order: [['updatedAt', 'DESC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -160,7 +160,7 @@ export class CardsPackService {
               name: { [Op.startsWith]: packName },
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['updatedAt', 'ASC'],
+            order: [['updatedAt', 'ASC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -170,7 +170,7 @@ export class CardsPackService {
               userId: userId,
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['updatedAt', 'ASC'],
+            order: [['updatedAt', 'ASC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -182,7 +182,7 @@ export class CardsPackService {
               name: { [Op.startsWith]: packName },
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['cardsCount', 'DESC'],
+            order: [['cardsCount', 'DESC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -192,7 +192,7 @@ export class CardsPackService {
               userId: userId,
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['cardsCount', 'DESC'],
+            order: [['cardsCount', 'DESC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -204,7 +204,7 @@ export class CardsPackService {
               name: { [Op.startsWith]: packName },
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['cardsCount', 'ASC'],
+            order: [['cardsCount', 'ASC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
@@ -214,7 +214,7 @@ export class CardsPackService {
               userId: userId,
               cardsCount: { [Op.between]: [min, max] },
             },
-            order: ['cardsCount', 'ASC'],
+            order: [['cardsCount', 'ASC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
