@@ -37,9 +37,10 @@ export class CardController {
   }
 
   @Post('')
-  async addCard(@Body() dto: CreateCardDTO) {
+  async addCard(@Body() dto: CreateCardDTO, @Request() req: any) {
     const card = await this.cardService.addCard(dto);
     await this.cardsPackService.updateCardCount(true, card.packId);
+    await this.userService.updateCardCount(true, req.user.id, 1);
     const userList = await this.userService.getAllUsersId();
     await this.gradeService.createGradesForNewCard(userList, card.id);
   }
@@ -53,8 +54,10 @@ export class CardController {
   async deleteCard(
     @Param('cardId') cardId: number,
     @Param('packId') packId: number,
+    @Request() req: any,
   ) {
     await this.cardService.deleteCard(cardId);
     await this.cardsPackService.updateCardCount(false, packId);
+    await this.userService.updateCardCount(false, req.user.id, 1);
   }
 }

@@ -62,4 +62,19 @@ export class UserService {
   async getAllUsersId() {
     return await this.userRepository.findAll({ attributes: ['id'] });
   }
+
+  async updateCardCount(isPlus: boolean, userId: number, count: number) {
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+    });
+    if (!user) throw new Error('User not found');
+    let newCount = user.cardsCount;
+    if (isPlus) newCount += count;
+    else newCount -= count;
+    if (newCount < 0) throw new Error('What? Your card count < 0... :0');
+    return await this.userRepository.update(
+        { cardsCount: newCount },
+        { where: { id: userId } },
+    );
+  }
 }
