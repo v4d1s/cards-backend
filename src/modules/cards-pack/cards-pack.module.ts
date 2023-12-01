@@ -6,6 +6,7 @@ import { CardsPackController } from './cards-pack.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from '../user/jwt.strategy';
 import {User} from "../user/model/user.schema";
+import {UserService} from "../user/user.service";
 
 @Module({
   imports: [
@@ -16,6 +17,6 @@ import {User} from "../user/model/user.schema";
     }),
   ],
   controllers: [CardsPackController],
-  providers: [CardsPackService],
+  providers: [CardsPackService, UserService],
 })
 export class CardsPackModule {}
