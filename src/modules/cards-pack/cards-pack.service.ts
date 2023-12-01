@@ -254,4 +254,8 @@ export class CardsPackService {
       { where: { id: packId } },
     );
   }
+
+  async getTotalCount() {
+    return await this.cardsPackRepository.count();
+  }
 }

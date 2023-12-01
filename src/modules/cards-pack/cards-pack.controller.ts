@@ -26,7 +26,7 @@ export class CardsPackController {
   //   return this.cardsPackService.getCardsPacks();
   // }
   @Get('')
-  getCardsPacks(
+  async getCardsPacks(
       @Query('user_id') userId: number,
       @Query('page') page: number,
       @Query('pageCount') pageCount: number,
@@ -38,9 +38,15 @@ export class CardsPackController {
       @Request() req: any,
   ) {
     if (userId != null || userId != undefined)
-      return this.cardsPackService.getCardsPacksFromUser(userId, page, pageCount, sort, min, max, totalCount, packName);
+      return {
+        cardPacks: await this.cardsPackService.getCardsPacksFromUser(userId, page, pageCount, sort, min, max, totalCount, packName),
+        cardPacksTotalCount: await this.cardsPackService.getTotalCount(),
+      };
     else
-      return this.cardsPackService.getCardsPacks(req.user.id, page, pageCount, sort, min, max, totalCount, packName);
+      return {
+        cardPacks: await this.cardsPackService.getCardsPacks(req.user.id, page, pageCount, sort, min, max, totalCount, packName),
+        cardPacksTotalCount: await this.cardsPackService.getTotalCount(),
+      };
   }
 
   @Get(':packId')
