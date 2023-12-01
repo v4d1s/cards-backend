@@ -13,6 +13,7 @@ import { CardsPackService } from './cards-pack.service';
 import { CreateCardsPackDTO } from './dto';
 import { AuthGuard } from '../user/auth.guard';
 import {UserService} from "../user/user.service";
+import {CardsPack} from "./model/cards-pack.schema";
 
 @UseGuards(AuthGuard)
 @Controller('pack')
@@ -37,16 +38,21 @@ export class CardsPackController {
       @Query('packName') packName: string,
       @Request() req: any,
   ) {
-    if (userId != null || userId != undefined)
+    let cardPacks: CardsPack[];
+    if (userId != null || userId != undefined) {
+      cardPacks = await this.cardsPackService.getCardsPacksFromUser(userId, page, pageCount, sort, min, max, totalCount, packName);
       return {
-        cardPacks: await this.cardsPackService.getCardsPacksFromUser(userId, page, pageCount, sort, min, max, totalCount, packName),
-        cardPacksTotalCount: await this.cardsPackService.getTotalCount(),
+        cardPacks: cardPacks,
+        cardPacksTotalCount: cardPacks.length,
       };
-    else
+    }
+    else {
+      cardPacks = await this.cardsPackService.getCardsPacks(req.user.id, page, pageCount, sort, min, max, totalCount, packName);
       return {
-        cardPacks: await this.cardsPackService.getCardsPacks(req.user.id, page, pageCount, sort, min, max, totalCount, packName),
-        cardPacksTotalCount: await this.cardsPackService.getTotalCount(),
+        cardPacks: cardPacks,
+        cardPacksTotalCount: cardPacks.length,
       };
+    }
   }
 
   @Get(':packId')
