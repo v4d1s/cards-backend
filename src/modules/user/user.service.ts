@@ -28,6 +28,7 @@ export class UserService {
 
   async login(dto: CreateUserDTO) {
     const userRecord = await this.userRepository.findOne({
+      attributes: { exclude: ['password', 'isAdmin', 'cardsPacksList'] },
       where: { email: dto.email },
     });
     if (!userRecord) {
@@ -37,6 +38,10 @@ export class UserService {
         const payload = { email: dto.email, id: userRecord.id };
         return {
           access_token: this.jwtService.sign(payload),
+          id: userRecord.id,
+          email: userRecord.email,
+          name: userRecord.name,
+          cardsCount: userRecord.cardsCount,
         };
       } else {
         throw new Error('Incorrect password');
