@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { CardsPack } from './model/cards-pack.schema';
 import { CreateCardsPackDTO } from './dto';
 import { Op } from "sequelize";
+import {User} from "../user/model/user.schema";
 
 @Injectable()
 export class CardsPackService {
@@ -28,6 +29,17 @@ export class CardsPackService {
       case '0updated':
         if (packName != "")
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               [Op.or]: [{ isPrivate: false }, { isPrivate: true, userId: userId }],
               name: { [Op.startsWith]: packName },
@@ -40,6 +52,17 @@ export class CardsPackService {
           })
         else
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               [Op.or]: [{ isPrivate: false }, { isPrivate: true, userId: userId }],
               cardsCount: { [Op.between]: [min, max] },
@@ -51,6 +74,17 @@ export class CardsPackService {
       case '1updated':
         if (packName != "")
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               [Op.or]: [{ isPrivate: false }, { isPrivate: true, userId: userId }],
               name: { [Op.startsWith]: packName },
@@ -62,6 +96,17 @@ export class CardsPackService {
           })
         else
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               [Op.or]: [{ isPrivate: false }, { isPrivate: true, userId: userId }],
               cardsCount: { [Op.between]: [min, max] },
@@ -73,6 +118,17 @@ export class CardsPackService {
       case '0cardsCount':
         if (packName != "")
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               [Op.or]: [{ isPrivate: false }, { isPrivate: true, userId: userId }],
               name: { [Op.startsWith]: packName },
@@ -84,6 +140,17 @@ export class CardsPackService {
           })
         else
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               [Op.or]: [{ isPrivate: false }, { isPrivate: true, userId: userId }],
               cardsCount: { [Op.between]: [min, max] },
@@ -95,6 +162,17 @@ export class CardsPackService {
       case '1cardsCount':
         if (packName != "")
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               [Op.or]: [{ isPrivate: false }, { isPrivate: true, userId: userId }],
               name: { [Op.startsWith]: packName },
@@ -106,6 +184,17 @@ export class CardsPackService {
           })
         else
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               [Op.or]: [{ isPrivate: false }, { isPrivate: true, userId: userId }],
               cardsCount: { [Op.between]: [min, max] },
@@ -133,6 +222,17 @@ export class CardsPackService {
       case '0updated':
         if (packName != "")
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               userId: userId,
               name: { [Op.startsWith]: packName },
@@ -144,6 +244,17 @@ export class CardsPackService {
           })
         else
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               userId: userId,
               cardsCount: { [Op.between]: [min, max] },
@@ -155,6 +266,17 @@ export class CardsPackService {
       case '1updated':
         if (packName != "")
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               userId: userId,
               name: { [Op.startsWith]: packName },
@@ -166,6 +288,17 @@ export class CardsPackService {
           })
         else
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               userId: userId,
               cardsCount: { [Op.between]: [min, max] },
@@ -177,6 +310,17 @@ export class CardsPackService {
       case '0cardsCount':
         if (packName != "")
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               userId: userId,
               name: { [Op.startsWith]: packName },
@@ -188,6 +332,17 @@ export class CardsPackService {
           })
         else
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               userId: userId,
               cardsCount: { [Op.between]: [min, max] },
@@ -199,6 +354,17 @@ export class CardsPackService {
       case '1cardsCount':
         if (packName != "")
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               userId: userId,
               name: { [Op.startsWith]: packName },
@@ -210,6 +376,17 @@ export class CardsPackService {
           })
         else
           return await this.cardsPackRepository.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                right: true,
+                where: { id: userId },
+                through: {
+                  attributes: ['name']
+                },
+              },
+            ],
             where: {
               userId: userId,
               cardsCount: { [Op.between]: [min, max] },
