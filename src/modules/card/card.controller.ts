@@ -39,7 +39,7 @@ export class CardController {
   @Post('')
   async addCard(@Body() dto: CreateCardDTO, @Request() req: any) {
     const pack = await this.cardsPackService.getCardsPack(dto.packId);
-    if (pack.cardsCount > 110) throw new Error('Cards count of this pack is max')
+    if (pack.cardsCount >= 110) throw new Error('Cards count of this pack is max')
     const card = await this.cardService.addCard(dto);
     await this.cardsPackService.updateCardCount(true, card.packId);
     await this.userService.updateCardCount(true, req.user.id, 1);
