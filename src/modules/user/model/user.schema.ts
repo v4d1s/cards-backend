@@ -1,5 +1,6 @@
 import { Column, Default, HasMany, Model, Table } from 'sequelize-typescript';
 import { CardsPack } from '../../cards-pack/model/cards-pack.schema';
+import { Card } from '../../card/model/card.schema';
 
 @Table
 export class User extends Model {
@@ -14,9 +15,6 @@ export class User extends Model {
   password: string;
   @Column
   name: string;
-  @Default(false)
-  @Column
-  isAdmin: boolean;
   @Default(0)
   @Column
   cardsCount: number;
@@ -25,4 +23,9 @@ export class User extends Model {
     onUpdate: 'CASCADE',
   })
   cardsPacksList: CardsPack[];
+  @HasMany(() => Card, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  cardsList: Card[];
 }

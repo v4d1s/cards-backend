@@ -119,6 +119,7 @@ export class CardService {
       packId: dto.packId,
       question: dto.question,
       answer: dto.answer,
+      userId: dto.userId,
     };
     return await this.cardRepository.create(newCard);
   }
