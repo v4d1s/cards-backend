@@ -25,10 +25,11 @@ export class CardsPackService {
     totalCount: number,
     packName: string,
   ) {
+    let { count, rows } = { count: null, rows: null };
     switch (sort) {
       case '0updated':
         if (packName != "")
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } =  await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -41,14 +42,13 @@ export class CardsPackService {
               [Op.or]: [{ isPrivate: false }, { isPrivate: true, userId: userId }],
               name: { [Op.startsWith]: packName },
               cardsCount: { [Op.between]: [min, max] },
-              isPrivate: {}
             },
             order: [['updatedAt', 'DESC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
           })
         else
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } =  await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -67,7 +67,7 @@ export class CardsPackService {
           })
       case '1updated':
         if (packName != "")
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } =  await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -86,7 +86,7 @@ export class CardsPackService {
             offset: (page - 1) * pageCount,
           })
         else
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } =  await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -105,7 +105,7 @@ export class CardsPackService {
           })
       case '0cardsCount':
         if (packName != "")
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } =  await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -124,7 +124,7 @@ export class CardsPackService {
             offset: (page - 1) * pageCount,
           })
         else
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } =  await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -143,7 +143,7 @@ export class CardsPackService {
           })
       case '1cardsCount':
         if (packName != "")
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } =  await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -162,7 +162,7 @@ export class CardsPackService {
             offset: (page - 1) * pageCount,
           })
         else
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } =  await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -194,10 +194,11 @@ export class CardsPackService {
       totalCount: number,
       packName: string
   ) {
+    let { count, rows } = { count: null, rows: null };
     switch (sort) {
       case '0updated':
         if (packName != "")
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } = await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -216,7 +217,7 @@ export class CardsPackService {
             offset: (page - 1) * pageCount,
           })
         else
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } = await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -235,7 +236,7 @@ export class CardsPackService {
           })
       case '1updated':
         if (packName != "")
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } = await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -254,7 +255,7 @@ export class CardsPackService {
             offset: (page - 1) * pageCount,
           })
         else
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } =  await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -273,7 +274,7 @@ export class CardsPackService {
           })
       case '0cardsCount':
         if (packName != "")
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } =  await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -292,7 +293,7 @@ export class CardsPackService {
             offset: (page - 1) * pageCount,
           })
         else
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } =  await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -311,7 +312,7 @@ export class CardsPackService {
           })
       case '1cardsCount':
         if (packName != "")
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } =  await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
@@ -330,7 +331,7 @@ export class CardsPackService {
             offset: (page - 1) * pageCount,
           })
         else
-          return await this.cardsPackRepository.findAll({
+          return { count, rows } =  await this.cardsPackRepository.findAndCountAll({
             include: [
               {
                 model: User,
