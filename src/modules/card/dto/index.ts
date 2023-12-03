@@ -8,3 +8,10 @@ export class CreateCardDTO {
   @IsString()
   answer: string;
 }
+
+export class UpdateCardDTO {
+  @IsString()
+  question: string;
+  @IsString()
+  answer: string;
+}

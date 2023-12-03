@@ -8,9 +8,10 @@ import {
   Post,
   UseGuards,
   Request,
+  Query,
 } from '@nestjs/common';
 import { CardService } from './card.service';
-import { CreateCardDTO } from './dto';
+import {CreateCardDTO, UpdateCardDTO} from './dto';
 import { AuthGuard } from '../user/auth.guard';
 import { CardsPackService } from '../cards-pack/cards-pack.service';
 import { GradeService } from '../grade/grade.service';
@@ -27,8 +28,19 @@ export class CardController {
   ) {}
 
   @Get('')
-  getCards(@Param('packId') packId: number, @Request() req: any) {
-    return this.cardService.getCards(packId, req.user.id);
+  async getCards(
+    @Query('cardQuestion') cardQuestion: string,
+    @Query('page') page: number,
+    @Query('pageCount') pageCount: number,
+    @Query('sortCards') sortCards: string,
+    @Param('packId') packId: number,
+    @Request() req: any,
+  ) {
+    const { count, rows } = await this.cardService.getCards(packId, req.user.id, cardQuestion, page, pageCount, sortCards);
+    return {
+      cards: rows,
+      cardsTotalCount: count,
+    };
   }
 
   @Get(':cardId')
@@ -48,7 +60,7 @@ export class CardController {
   }
 
   @Patch(':cardId')
-  updateCard(@Body() dto: CreateCardDTO, @Param('cardId') cardId: number) {
+  updateCard(@Body() dto: UpdateCardDTO, @Param('cardId') cardId: number) {
     return this.cardService.updateCard(dto, cardId);
   }
 
