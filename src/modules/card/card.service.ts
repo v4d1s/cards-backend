@@ -1,10 +1,10 @@
 import { Injectable, UseGuards } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Card } from './model/card.schema';
-import {CreateCardDTO, UpdateCardDTO} from './dto';
+import { CreateCardDTO, UpdateCardDTO } from './dto';
 import { AuthGuard } from '../user/auth.guard';
 import { Grade } from '../grade/model/grade.schema';
-import {Op} from "sequelize";
+import { Op } from 'sequelize';
 
 @UseGuards(AuthGuard)
 @Injectable()
@@ -14,18 +14,18 @@ export class CardService {
   ) {}
 
   async getCards(
-      packId: number,
-      userId: number,
-      cardQuestion: string,
-      page: number,
-      pageCount: number,
-      sortCards: string,
+    packId: number,
+    userId: number,
+    cardQuestion: string,
+    page: number,
+    pageCount: number,
+    sortCards: string,
   ) {
     let { count, rows } = { count: null, rows: null };
     switch (sortCards) {
       case '0updated':
-        if (cardQuestion != "")
-          return { count, rows } = await this.cardRepository.findAndCountAll({
+        if (cardQuestion != '')
+          return ({ count, rows } = await this.cardRepository.findAndCountAll({
             include: [
               {
                 model: Grade,
@@ -41,9 +41,9 @@ export class CardService {
             order: [['updatedAt', 'DESC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
-          })
+          }));
         else
-          return { count, rows } = await this.cardRepository.findAndCountAll({
+          return ({ count, rows } = await this.cardRepository.findAndCountAll({
             include: [
               {
                 model: Grade,
@@ -58,10 +58,10 @@ export class CardService {
             order: [['updatedAt', 'DESC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
-          })
+          }));
       case '1updated':
-        if (cardQuestion != "")
-          return { count, rows } = await this.cardRepository.findAndCountAll({
+        if (cardQuestion != '')
+          return ({ count, rows } = await this.cardRepository.findAndCountAll({
             include: [
               {
                 model: Grade,
@@ -77,9 +77,9 @@ export class CardService {
             order: [['updatedAt', 'ASC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
-          })
+          }));
         else
-          return { count, rows } = await this.cardRepository.findAndCountAll({
+          return ({ count, rows } = await this.cardRepository.findAndCountAll({
             include: [
               {
                 model: Grade,
@@ -94,7 +94,7 @@ export class CardService {
             order: [['updatedAt', 'ASC']],
             limit: pageCount,
             offset: (page - 1) * pageCount,
-          })
+          }));
       default:
         throw new Error('Query param sort is wrong');
     }

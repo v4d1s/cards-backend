@@ -73,8 +73,8 @@ export class UserService {
     else newCount -= count;
     if (newCount < 0) throw new Error('What? Your card count < 0... :0');
     return await this.userRepository.update(
-        { cardsCount: newCount },
-        { where: { id: userId } },
+      { cardsCount: newCount },
+      { where: { id: userId } },
     );
   }
 }

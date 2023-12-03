@@ -4,7 +4,8 @@ import {
   Model,
   Table,
   ForeignKey,
-  Default, BelongsTo,
+  Default,
+  BelongsTo,
 } from 'sequelize-typescript';
 import { Card } from '../../card/model/card.schema';
 import { User } from '../../user/model/user.schema';

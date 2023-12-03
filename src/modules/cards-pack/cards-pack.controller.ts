@@ -11,9 +11,9 @@ import {
   Patch,
 } from '@nestjs/common';
 import { CardsPackService } from './cards-pack.service';
-import {CreateCardsPackDTO, UpdateCardsPackDTO} from './dto';
+import { CreateCardsPackDTO, UpdateCardsPackDTO } from './dto';
 import { AuthGuard } from '../user/auth.guard';
-import {UserService} from "../user/user.service";
+import { UserService } from '../user/user.service';
 
 @UseGuards(AuthGuard)
 @Controller('pack')
@@ -24,25 +24,39 @@ export class CardsPackController {
   ) {}
   @Get('')
   async getCardsPacks(
-      @Query('user_id') userId: number,
-      @Query('page') page: number,
-      @Query('pageCount') pageCount: number,
-      @Query('sortPacks') sort: string,
-      @Query('min') min: number,
-      @Query('max') max: number,
-      @Query('cardPacksTotalCount') totalCount: number,
-      @Query('packName') packName: string,
-      @Request() req: any,
+    @Query('user_id') userId: number,
+    @Query('page') page: number,
+    @Query('pageCount') pageCount: number,
+    @Query('sortPacks') sort: string,
+    @Query('min') min: number,
+    @Query('max') max: number,
+    @Query('packName') packName: string,
+    @Request() req: any,
   ) {
     if (userId != null || userId != undefined) {
-      const { count, rows } = await this.cardsPackService.getCardsPacksFromUser(userId, page, pageCount, sort, min, max, totalCount, packName);
+      const { count, rows } = await this.cardsPackService.getCardsPacksFromUser(
+        userId,
+        page,
+        pageCount,
+        sort,
+        min,
+        max,
+        packName,
+      );
       return {
         cardPacks: rows,
         cardPacksTotalCount: count,
       };
-    }
-    else {
-      const { count, rows } = await this.cardsPackService.getCardsPacks(req.user.id, page, pageCount, sort, min, max, totalCount, packName);
+    } else {
+      const { count, rows } = await this.cardsPackService.getCardsPacks(
+        req.user.id,
+        page,
+        pageCount,
+        sort,
+        min,
+        max,
+        packName,
+      );
       return {
         cardPacks: rows,
         cardPacksTotalCount: count,
@@ -68,7 +82,10 @@ export class CardsPackController {
   }
 
   @Patch(':packId')
-  async updateCardsPack(@Param('packId') packId: number, @Body() dto: UpdateCardsPackDTO) {
+  async updateCardsPack(
+    @Param('packId') packId: number,
+    @Body() dto: UpdateCardsPackDTO,
+  ) {
     await this.cardsPackService.updateCardPack(dto, packId);
   }
 }
