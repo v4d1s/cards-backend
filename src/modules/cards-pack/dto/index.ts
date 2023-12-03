@@ -8,3 +8,10 @@ export class CreateCardsPackDTO {
   @IsBoolean()
   isPrivate: boolean;
 }
+
+export class UpdateCardsPackDTO {
+  @IsString()
+  name: string;
+  @IsBoolean()
+  isPrivate: boolean;
+}

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CardsPack } from './model/cards-pack.schema';
-import { CreateCardsPackDTO } from './dto';
+import {CreateCardsPackDTO, UpdateCardsPackDTO} from './dto';
 import { Op } from "sequelize";
 import {User} from "../user/model/user.schema";
 
@@ -11,9 +11,6 @@ export class CardsPackService {
     @InjectModel(CardsPack)
     private readonly cardsPackRepository: typeof CardsPack,
   ) {}
-  // async getCardsPacks() {
-  //   return await this.cardsPackRepository.findAll();
-  // }
 
   async getCardsPacks(
     userId: number,
@@ -369,6 +366,10 @@ export class CardsPackService {
 
   async deleteCardPack(packId: number) {
     return await this.cardsPackRepository.destroy({ where: { id: packId } });
+  }
+
+  async updateCardPack(dto: UpdateCardsPackDTO, packId: number) {
+    return await this.cardsPackRepository.update(dto, { where: { id: packId } });
   }
 
   async updateCardCount(isPlus: boolean, packId: number) {

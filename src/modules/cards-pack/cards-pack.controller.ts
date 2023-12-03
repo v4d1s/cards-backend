@@ -8,9 +8,10 @@ import {
   UseGuards,
   Request,
   Query,
+  Patch,
 } from '@nestjs/common';
 import { CardsPackService } from './cards-pack.service';
-import { CreateCardsPackDTO } from './dto';
+import {CreateCardsPackDTO, UpdateCardsPackDTO} from './dto';
 import { AuthGuard } from '../user/auth.guard';
 import {UserService} from "../user/user.service";
 
@@ -21,10 +22,6 @@ export class CardsPackController {
     private readonly cardsPackService: CardsPackService,
     private readonly userService: UserService,
   ) {}
-  // @Get('')
-  // getCardsPacks() {
-  //   return this.cardsPackService.getCardsPacks();
-  // }
   @Get('')
   async getCardsPacks(
       @Query('user_id') userId: number,
@@ -68,5 +65,10 @@ export class CardsPackController {
     const pack = await this.cardsPackService.getCardsPack(packId);
     await this.cardsPackService.deleteCardPack(packId);
     await this.userService.updateCardCount(false, req.user.id, pack.cardsCount);
+  }
+
+  @Patch(':packId')
+  async updateCardsPack(@Param('packId') packId: number, @Body() dto: UpdateCardsPackDTO) {
+    await this.cardsPackService.updateCardPack(dto, packId);
   }
 }
